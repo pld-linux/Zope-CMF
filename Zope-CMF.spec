@@ -4,7 +4,7 @@ Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
 Version:	1.4.2
-Release:	3
+Release:	4
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
@@ -14,7 +14,7 @@ URL:		http://cmf.zope.org/
 Requires:	Zope
 Requires(pre):	/usr/sbin/installzopeproduct
 BuildArch:	noarch
-BuildRoot:	%{tmpdir}/%{zope_subname}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Content Management Framework (CMF) for Zope from Zope Corporation
