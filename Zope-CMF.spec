@@ -3,15 +3,15 @@
 Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
-Version:	1.4.4
+Version:	1.4.5
 #%%define		sub_ver rc1
 #%%define		plone_ver CMFPlone2.0-rc6
 #%%define		plone_dir CMFPlone-2.0-rc6
 Release:	1
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
-Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
-# Source0-md5:	d64699d4d1513b2671b52506900d6ca2
+Source0:	http://zope.org/Products/CMF/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
+# Source0-md5:	b3df990ee35964b22da500dda6c9172c
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
