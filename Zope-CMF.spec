@@ -54,13 +54,17 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/docs
 rm -rf $RPM_BUILD_ROOT
 
 %post
-/usr/sbin/installzopeproduct %{_datadir}/%{name}
+for p in CMFCalendar CMFCore CMFDefault CMFTopic DCWorkflow ; do
+	/usr/sbin/installzopeproduct %{_datadir}/%{name}/$p
+done
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
 
 %postun
-/usr/sbin/installzopeproduct -d %{name}
+for p in CMFCalendar CMFCore CMFDefault CMFTopic DCWorkflow ; do
+	/usr/sbin/installzopeproduct -d $p
+done
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
