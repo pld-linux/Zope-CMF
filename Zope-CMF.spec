@@ -11,7 +11,7 @@ Release:	0.%{sub_ver}.1
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 #Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}-%{sub_ver}.tar.gz
-Source0:        http://osdn.dl.sourceforge.net/sourceforge/plone/%{plone_ver}.tar.gz
+Source0:        http://dl.sourceforge.net/sourceforge/plone/%{plone_ver}.tar.gz
 # Source0-md5:  f6c03e49d910a6159f1810336941e92d
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
