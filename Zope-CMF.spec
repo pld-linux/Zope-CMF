@@ -1,18 +1,19 @@
 %include	/usr/lib/rpm/macros.python
+%define		zope_subname CMF
 Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
-Name:		CMF
+Name:		Zope-%{zope_subname}
 Version:	1.4.2
-Release:	2
+Release:	3
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
-Source0:	http://cmf.zope.org/download/%{name}-%{version}/%{name}-%{version}.tar.gz
+Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
 # Source0-md5:	345f8f79ce68d5535933ee897782005b
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
 BuildArch:	noarch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{zope_subname}-%{version}-root-%(id -u -n)
 
 %define 	product_dir	/usr/lib/zope/Products
 
@@ -27,7 +28,7 @@ tre¶ci± dla Zope. Dostarcza w krótkim czasie potê¿ny, dopasowany
 system zarz±dzania tre¶ci± dla du¿ych producentów.
 
 %prep
-%setup -q
+%setup -q -n %{zope_subname}-%{version}
 
 %build
 mkdir docs/CMFCalendar docs/CMFCore docs/CMFDefault docs/CMFTopic docs/DCWorkflow
