@@ -12,10 +12,9 @@ Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
+Requires(pre):	/usr/sbin/installzopeproduct
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{zope_subname}-%{version}-root-%(id -u -n)
-
-%define 	product_dir	/usr/lib/zope/Products
 
 %description
 Content Management Framework (CMF) for Zope from Zope Corporation
@@ -41,25 +40,27 @@ mv -f DCWorkflow/{README.txt,CHANGES.txt} docs/DCWorkflow
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{product_dir}
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-cp -af * $RPM_BUILD_ROOT%{product_dir}
+cp -af * $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-%py_comp $RPM_BUILD_ROOT%{product_dir}
-%py_ocomp $RPM_BUILD_ROOT%{product_dir}
+%py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 # find $RPM_BUILD_ROOT -type f -name "*.py" -exec rm -rf {} \;;
-rm -rf $RPM_BUILD_ROOT%{product_dir}/docs
+rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/docs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/usr/sbin/installzopeproduct %{_datadir}/%{name}
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
 
 %postun
+/usr/sbin/installzopeproduct -d %{name}
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
@@ -67,11 +68,11 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc docs/*
-%{product_dir}/all_cmf_tests.*
-%{product_dir}/slurp*
-%{product_dir}/*.txt
-%{product_dir}/CMFCalendar
-%{product_dir}/CMFCore
-%{product_dir}/CMFDefault
-%{product_dir}/CMFTopic
-%{product_dir}/DCWorkflow
+%{_datadir}/%{name}/all_cmf_tests.*
+%{_datadir}/%{name}/slurp*
+%{_datadir}/%{name}/*.txt
+%{_datadir}/%{name}/CMFCalendar
+%{_datadir}/%{name}/CMFCore
+%{_datadir}/%{name}/CMFDefault
+%{_datadir}/%{name}/CMFTopic
+%{_datadir}/%{name}/DCWorkflow
