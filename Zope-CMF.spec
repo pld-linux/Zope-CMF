@@ -6,7 +6,7 @@ Version:	1.5.0
 #%%define		sub_ver rc1
 #%%define		plone_ver CMFPlone2.0-rc6
 #%%define		plone_dir CMFPlone-2.0-rc6
-Release:	1
+Release:	2
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 Source0:	http://zope.org/Products/CMF/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
