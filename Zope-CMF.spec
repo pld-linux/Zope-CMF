@@ -3,12 +3,16 @@
 Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
-Version:	1.4.2
-Release:	4
+Version:	1.4.3
+%define		sub_ver rc1
+%define		plone_ver CMFPlone2.0-rc6
+%define		plone_dir CMFPlone-2.0-rc6
+Release:	0.%{sub_ver}.1
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
-Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
-# Source0-md5:	345f8f79ce68d5535933ee897782005b
+#Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}-%{sub_ver}.tar.gz
+Source0:        http://osdn.dl.sourceforge.net/sourceforge/plone/%{plone_ver}.tar.gz
+# Source0-md5:  f6c03e49d910a6159f1810336941e92d
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
@@ -28,22 +32,23 @@ tre¶ci± dla Zope. Dostarcza w krótkim czasie potê¿ny, dopasowany
 system zarz±dzania tre¶ci± dla du¿ych producentów.
 
 %prep
-%setup -q -n %{zope_subname}-%{version}
+%setup -q -c %{plone_ver}
 
 %build
+mkdir docs
 mkdir docs/CMFCalendar docs/CMFCore docs/CMFDefault docs/CMFTopic docs/DCWorkflow
-mv -f {CHANGES.txt,HISTORY.txt,INSTALL*,README.txt} docs/
-mv -f CMFCalendar/{INSTALL.txt,README.txt,TODO.txt,CREDITS.txt} docs/CMFCalendar
-mv -f CMFCore/README.txt docs/CMFCore
-mv -f CMFDefault/README.txt docs/CMFDefault
-mv -f CMFTopic/README.txt docs/CMFTopic
-mv -f DCWorkflow/{README.txt,CHANGES.txt} docs/DCWorkflow
+#mv -f {CHANGES.txt,HISTORY.txt,INSTALL*,README.txt} docs/
+mv -f %{plone_dir}/CMFCalendar/{INSTALL.txt,README.txt,TODO.txt,CREDITS.txt} docs/CMFCalendar
+mv -f %{plone_dir}/CMFCore/README.txt docs/CMFCore
+mv -f %{plone_dir}/CMFDefault/README.txt docs/CMFDefault
+mv -f %{plone_dir}/CMFTopic/README.txt docs/CMFTopic
+mv -f %{plone_dir}/DCWorkflow/{README.txt,CHANGES.txt} docs/DCWorkflow
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-cp -af * $RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -af %{plone_dir}/{CMFCalendar,CMFCore,CMFDefault,CMFTopic,DCWorkflow} $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
