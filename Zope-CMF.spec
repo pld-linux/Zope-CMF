@@ -62,9 +62,11 @@ if [ -f /var/lock/subsys/zope ]; then
 fi
 
 %postun
-for p in CMFCalendar CMFCore CMFDefault CMFTopic DCWorkflow ; do
-	/usr/sbin/installzopeproduct -d $p
-done
+if [ "$1" = "0" ]; then
+	for p in CMFCalendar CMFCore CMFDefault CMFTopic DCWorkflow ; do
+		/usr/sbin/installzopeproduct -d $p
+	done
+fi
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
@@ -72,11 +74,4 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc docs/*
-%{_datadir}/%{name}/all_cmf_tests.*
-%{_datadir}/%{name}/slurp*
-%{_datadir}/%{name}/*.txt
-%{_datadir}/%{name}/CMFCalendar
-%{_datadir}/%{name}/CMFCore
-%{_datadir}/%{name}/CMFDefault
-%{_datadir}/%{name}/CMFTopic
-%{_datadir}/%{name}/DCWorkflow
+%{_datadir}/%{name}
