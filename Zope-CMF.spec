@@ -4,7 +4,7 @@ Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
 Version:	1.3.3
-Release:	3
+Release:	4
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
@@ -13,7 +13,7 @@ URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
 BuildArch:	noarch
-BuildRoot:	%{tmpdir}/%{zope_subname}-%{version}-root-%(id -u -n)
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	product_dir	/usr/lib/zope/Products
 
