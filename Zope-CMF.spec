@@ -13,6 +13,7 @@ Group:		Networking/Daemons
 Source0:	http://zope.org/Products/CMF/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
 # Source0-md5:	2aca7518950444fa4f7437860865647f
 URL:		http://cmf.zope.org/
+BuildRequires:  python
 %pyrequires_eq	python-modules
 Requires:	Zope
 Requires(post,postun):	/usr/sbin/installzopeproduct
