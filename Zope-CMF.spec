@@ -2,7 +2,7 @@
 Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
-Version:	1.4.7
+Version:	1.5.0
 #%%define		sub_ver rc1
 #%%define		plone_ver CMFPlone2.0-rc6
 #%%define		plone_dir CMFPlone-2.0-rc6
@@ -10,7 +10,7 @@ Release:	1
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 Source0:	http://zope.org/Products/CMF/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
-# Source0-md5:	2aca7518950444fa4f7437860865647f
+# Source0-md5:	4cc76ed768d5ffe10383ad43954b970e
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
@@ -34,11 +34,13 @@ system zarz±dzania tre¶ci± dla du¿ych producentów.
 
 %build
 #mkdir docs
-mkdir docs/CMFCalendar docs/CMFCore docs/CMFDefault docs/CMFTopic docs/DCWorkflow
-mv -f {CHANGES.txt,HISTORY.txt,INSTALL*,README.txt} docs/
+mkdir docs/CMFActionIcons docs/CMFCalendar docs/CMFCore docs/CMFDefault docs/CMFSetup docs/CMFTopic docs/DCWorkflow
+mv -f CMFActionIcons/README.txt docs/CMFActionIcons
+mv -f {CHANGES.txt,HISTORY.txt,INSTALL*,README.txt,all*.py} docs/
 mv -f CMFCalendar/{INSTALL.txt,README.txt,TODO.txt,CREDITS.txt} docs/CMFCalendar
 mv -f CMFCore/README.txt docs/CMFCore
 mv -f CMFDefault/README.txt docs/CMFDefault
+mv -f CMFSetup/{CREDITS.txt,README.txt} docs/CMFSetup
 mv -f CMFTopic/README.txt docs/CMFTopic
 mv -f DCWorkflow/{README.txt,CHANGES.txt} docs/DCWorkflow
 
@@ -46,7 +48,7 @@ mv -f DCWorkflow/{README.txt,CHANGES.txt} docs/DCWorkflow
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-cp -af {CMFCalendar,CMFCore,CMFDefault,CMFTopic,DCWorkflow} $RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -af {CMFActionIcons,CMFCalendar,CMFCore,CMFDefault,CMFSetup,CMFTopic,CMFUid,DCWorkflow} $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
 %py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
@@ -58,7 +60,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/docs
 rm -rf $RPM_BUILD_ROOT
 
 %post
-for p in CMFCalendar CMFCore CMFDefault CMFTopic DCWorkflow ; do
+for p in CMFActionIcons CMFCalendar CMFCore CMFDefault CMFSetup CMFTopic CMFUid DCWorkflow ; do
 	/usr/sbin/installzopeproduct %{_datadir}/%{name}/$p
 done
 if [ -f /var/lock/subsys/zope ]; then
@@ -67,7 +69,7 @@ fi
 
 %postun
 if [ "$1" = "0" ]; then
-	for p in CMFCalendar CMFCore CMFDefault CMFTopic DCWorkflow ; do
+	for p in CMFActionIcons CMFCalendar CMFCore CMFDefault CMFSetup CMFTopic CMFUid DCWorkflow ; do
 		/usr/sbin/installzopeproduct -d $p
 	done
 fi
