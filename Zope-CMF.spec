@@ -4,7 +4,7 @@ Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
 Version:	1.3.3
-Release:	4
+Release:	5
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
@@ -12,10 +12,10 @@ Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
+Requires(post,postun):  /usr/sbin/installzopeproduct
+Obsoletes:	CMF
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define 	product_dir	/usr/lib/zope/Products
 
 %description
 Content Management Framework (CMF) for Zope from Zope Corporation
@@ -40,25 +40,33 @@ mv -f CMFTopic/*.txt docs/CMFTopic
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{product_dir}
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-cp -af * $RPM_BUILD_ROOT%{product_dir}
+cp -af * $RPM_BUILD_ROOT%{_datadir}/%{name}
 
-%py_comp $RPM_BUILD_ROOT%{product_dir}
-%py_ocomp $RPM_BUILD_ROOT%{product_dir}
+%py_comp $RPM_BUILD_ROOT%{_datadir}/%{name}
+%py_ocomp $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 #find $RPM_BUILD_ROOT -type f -name "*.py" -exec rm -rf {} \;;
-rm -rf $RPM_BUILD_ROOT%{product_dir}/docs
+rm -rf $RPM_BUILD_ROOT%{_datadir}/%{name}/docs
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
+for p in CMFCalendar CMFCore CMFDefault CMFTopic ; do
+        /usr/sbin/installzopeproduct %{_datadir}/%{name}/$p
+done
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
 
 %postun
+if [ "$1" = "0" ]; then
+        for p in CMFCalendar CMFCore CMFDefault CMFTopic ; do
+                /usr/sbin/installzopeproduct -d $p
+        done
+fi
 if [ -f /var/lock/subsys/zope ]; then
 	/etc/rc.d/init.d/zope restart >&2
 fi
@@ -66,8 +74,4 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc docs/*
-%{product_dir}/all_cmf_tests.*
-%{product_dir}/CMFCalendar
-%{product_dir}/CMFCore
-%{product_dir}/CMFDefault
-%{product_dir}/CMFTopic
+%{_datadir}/%{name}
