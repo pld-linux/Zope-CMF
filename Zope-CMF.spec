@@ -12,7 +12,7 @@ Source0:	http://cmf.zope.org/download/%{zope_subname}-%{version}/%{zope_subname}
 URL:		http://cmf.zope.org/
 %pyrequires_eq	python-modules
 Requires:	Zope
-Requires(pre):	/usr/sbin/installzopeproduct
+Requires(post,postun):	/usr/sbin/installzopeproduct
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
