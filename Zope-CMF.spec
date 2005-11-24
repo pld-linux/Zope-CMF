@@ -2,13 +2,13 @@
 Summary:	Content Management Framework for Zope
 Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
 Name:		Zope-%{zope_subname}
-Version:	1.5.4
+Version:	1.5.5
 Release:	1
 Epoch:		1
 License:	Zope Public License (ZPL)
 Group:		Networking/Daemons
 Source0:	http://zope.org/Products/CMF/%{zope_subname}-%{version}/%{zope_subname}-%{version}.tar.gz
-# Source0-md5:	3141c68b3be83c88d6b86efd25405974
+# Source0-md5:	301bf1cccefc1769614acf0fb3ba982c
 URL:		http://cmf.zope.org/
 BuildRequires:	python
 %pyrequires_eq	python-modules
@@ -35,7 +35,7 @@ system zarz±dzania tre¶ci± dla du¿ych producentów.
 #mkdir docs
 mkdir docs/CMFActionIcons docs/CMFCalendar docs/CMFCore docs/CMFDefault docs/CMFSetup docs/CMFTopic docs/DCWorkflow
 mv -f CMFActionIcons/README.txt docs/CMFActionIcons
-mv -f {CHANGES.txt,HISTORY.txt,INSTALL*,README.txt,all*.py} docs/
+mv -f {CHANGES.txt,HISTORY.txt,INSTALL*,README.txt} docs/
 mv -f CMFCalendar/{INSTALL.txt,README.txt,TODO.txt,CREDITS.txt} docs/CMFCalendar
 mv -f CMFCore/README.txt docs/CMFCore
 mv -f CMFDefault/README.txt docs/CMFDefault
