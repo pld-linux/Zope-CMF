@@ -12,8 +12,9 @@ Source0:	http://zope.org/Products/CMF/%{zope_subname}-%{version}/%{zope_subname}
 URL:		http://cmf.zope.org/
 BuildRequires:	python
 %pyrequires_eq	python-modules
-Requires:	Zope >= 2.7.7
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(post,postun):	/usr/sbin/installzopeproduct
+Requires:	Zope >= 2.7.7
 Obsoletes:	CMF
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -62,18 +63,14 @@ rm -rf $RPM_BUILD_ROOT
 for p in CMFActionIcons CMFCalendar CMFCore CMFDefault CMFSetup CMFTopic CMFUid DCWorkflow ; do
 	/usr/sbin/installzopeproduct %{_datadir}/%{name}/$p
 done
-if [ -f /var/lock/subsys/zope ]; then
-	/etc/rc.d/init.d/zope restart >&2
-fi
+%service -q zope restart
 
 %postun
 if [ "$1" = "0" ]; then
 	for p in CMFActionIcons CMFCalendar CMFCore CMFDefault CMFSetup CMFTopic CMFUid DCWorkflow ; do
 		/usr/sbin/installzopeproduct -d $p
 	done
-fi
-if [ -f /var/lock/subsys/zope ]; then
-	/etc/rc.d/init.d/zope restart >&2
+	%service -q zope restart
 fi
 
 %files
