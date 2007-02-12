@@ -1,6 +1,6 @@
 %define		zope_subname CMF
 Summary:	Content Management Framework for Zope
-Summary(pl):	¦rodowisko zarz±dzania tre¶ci± dla Zope
+Summary(pl.UTF-8):   Åšrodowisko zarzÄ…dzania treÅ›ciÄ… dla Zope
 Name:		Zope-%{zope_subname}
 Version:	1.5.5
 Release:	1
@@ -24,10 +24,10 @@ Content Management Framework (CMF) for Zope from Zope Corporation
 delivers a powerful, tailored CMS in a fraction of the time of big
 vendors.
 
-%description -l pl
-CMF to Content Management Framework, czyli ¶rodowisko zarz±dzania
-tre¶ci± dla Zope. Dostarcza w krótkim czasie potê¿ny, dopasowany
-system zarz±dzania tre¶ci± dla du¿ych producentów.
+%description -l pl.UTF-8
+CMF to Content Management Framework, czyli Å›rodowisko zarzÄ…dzania
+treÅ›ciÄ… dla Zope. Dostarcza w krÃ³tkim czasie potÄ™Å¼ny, dopasowany
+system zarzÄ…dzania treÅ›ciÄ… dla duÅ¼ych producentÃ³w.
 
 %prep
 %setup -q -n %{zope_subname}-%{version}
