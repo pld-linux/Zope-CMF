@@ -1,6 +1,6 @@
 %define		zope_subname CMF
 Summary:	Content Management Framework for Zope
-Summary(pl.UTF-8):   Środowisko zarządzania treścią dla Zope
+Summary(pl.UTF-8):	Środowisko zarządzania treścią dla Zope
 Name:		Zope-%{zope_subname}
 Version:	1.5.5
 Release:	1
